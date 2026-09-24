@@ -11,9 +11,8 @@ importance: 5
 tags: [制度, 赋税, 财政, 中唐]
 location: 长安
 related: [yang-yan, an-lushan-rebellion, yuanhe-restoration]
-status: reviewed
+status: draft
 generated_by: claude-fable-5-1
-reviewed_at: 2026-09-17
 ---
 
 ## 概述
@@ -58,6 +57,7 @@ reviewed_at: 2026-09-17
   category: modern
   license: paraphrase
   text: 钱穆将两税法视为中国经济史的分水岭：租庸调制背后是国家授田、人人有产的理想，两税法则放弃了这一理想，承认贫富分化并向富者征税；此后历代赋税改革都在两税法的框架内，直至清代摊丁入亩。他对此变化持惋惜态度。
+  note: （AI收集）AI 转述观点，原书未经人工核校。
 - author: AI 综述
   source: 综合《旧唐书》《新唐书》《文献通考》及钱穆、李剑农、崔瑞德等论著
   category: ai

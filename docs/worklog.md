@@ -492,16 +492,6 @@ validate 0 错误。
 - 春明梦余录：卷一〈建置〉载永乐元年定北京及永乐十八年建北京诏、卷六〈宫阙〉载紫禁城制度 → beijing-move。
 - 太平御览引《文士传》：卷七五二原文「文士传曰：张衡尝作木鸟，假以羽翮，腹中施机，能飞数里」→ zhang-heng。
 
-### 2026-09-23 · draft→reviewed 首批（据「前 9 批确实核过」口径）
-
-- 背景：`.tmp-ws/audit-status.py` 筛出 31 个 `fully_clean`（0「待核」且 0「（AI收集/原书待核）」声明）。用户提示「可直接翻 reviewed」。
-- 判定：`fully_clean` 只是**机械过滤**（无残留标记），不等于「逐条核到标准观点」。前 9 批是**待核驱动**——只动带标记条目，因此「干净」里混有两类：前 9 批改过又恰好干净的（真核过）、以及从头未打标记从没进过队列的（干净≠核过）。
-- 方法：把 9 批卷次消化 commit（a56931c…705eca7）实际改动的文件清单与 31 个 fully_clean 求交集，得到精确分界。
-- 结果：**21 篇 `draft→reviewed`**（补 `reviewed_at: 2026-09-23`，格式对齐 li-shimin 基准）＝前 9 批确实核过且现无残留标记者；**10 篇保持 draft**（干净但未在批次中核过）。
-- 翻 review 的 21：guangwu-restoration、hou-tang-mie-liang、zhou-shizong-reform、jin-destroy-liao、kaixi-beifa、longxing-heyi、tang-conquest-of-eastern-turks、wencheng-princess-tubo、san-jia-fen-jin、han-xiongnu-war、zhangqian-western-regions（事件 11）；chai-rong、li-yu、xu-guang-qi、si-ma-guang、fang-xuanling、guo-ziyi、li-chun、li-jing、li-keyong、li-su（人物 10）。
-- 保持 draft 的 10：dazexiang-uprising、qin-great-wall、tuien-ling、guan-zhong、du-ruhui、wang-xianzhi、yao-chong、huo-qubing、islamic-caliphate、meiji-restoration。
-- 遗留：这 21 篇只按「卷次/篇名定位 + 无残留标记」背书，style-guide §7 的第 2 条（quote 逐字对照）、第 3 条（modern 学者观点归属）仍属部分覆盖；如严格按 §7 全 10 条，仍需人工再核 quote 与学者观点。validate 0 错误。
-
 ### 2026-09-23 · 卷次消化收尾 · 31 个 fully_clean 甄别翻 reviewed
 
 背景：`.tmp-ws/audit-status.py` 机械筛出 31 个「fully_clean」（0 待核 + 0 AI 转述声明）draft。澄清一个易混点：**fully_clean ≠ 已核到标准观点**——前者只是「没打标记」，后者要求逐条核过书名/卷次、引文逐字、学者观点归属（style-guide §7 十条）。前 9 批卷次消化是「待核驱动」，只动带 `（卷次待核）` 标记的条目；所以「干净」里混着「真核过」与「从未进队列、干净仅因没标记」两类，不能整体翻 reviewed。
@@ -511,3 +501,37 @@ validate 0 错误。
 - **10 篇保留 draft**（干净但从未在批次中核过）：dazexiang-uprising、qin-great-wall、tuien-ling、guan-zhong、du-ruhui、wang-xianzhi、yao-chong、huo-qubing、islamic-caliphate（仅概述，无三块）、meiji-restoration。
 
 校验：`npm run validate` 0 错误（警告仅 unknown-related 指向未来节点，与本次无关）。现状 32 reviewed / 297 draft。10 篇剩余「干净而未核」的节点，若后续要翻，仍需逐条走一遍 §7（尤其引文逐字与 modern 学者观点归属），不要因「无标记」直接翻。
+
+- 遗留：这 21 篇只按「卷次/篇名定位 + 无残留标记」背书，style-guide §7 的第 2 条（quote 逐字对照）、第 3 条（modern 学者观点归属）仍属部分覆盖。（两节原重复记录，2026-09-24 合并为此一节。）
+
+### 2026-09-24 · 公版学者转述维基文库核对 + M0 样例问题处理
+
+背景：九批只核古籍卷次，近现代学者转述（§7 第 3 条）基本未核，是 draft→reviewed 的主要卡点。本次先核「转述作者已进公版、原文在 zh.wikisource 有录文」的节点，同时把这些节点的古籍 quote 逐字比对（脚本 `.tmp-ws/pd/qcheck.py`，繁简转换后比对）。
+
+公版学者作品在维基文库的实况：有《唐代政治史述论稿》三篇、《陶渊明之思想与清谈之关系》、《太史公行年考》、《殷周制度论》、《井田辨》、《诸子不出于王官论》、胡适《王莽》（1922）与《再论王莽》（1928）、梁启超《王荆公》（仅自序至第二章）；**无**或不全：吕思勉《先秦史》（仅前两章）、童书业《春秋史》（仅序）、吕思勉《隋唐五代史》《两晋南北朝史》、陈寅恪《隋唐制度渊源略论稿》、吴晗、汤用彤、向达等。
+
+**8 篇 draft→reviewed**（`reviewed_at: 2026-09-24`）：jing-tian-zhi、bai-jia-zheng-ming、fengjian-zongfa-liyue（此前未进批次，古籍部分本次一并核）、si-ma-qian、wang-mang、tao-yuan-ming、li-zhi、wang-anshi。学者转述逐条对照原文改写，note 改为「已核维基文库本」并写明版本。
+
+学者转述订正（AI 转述不准的实例）：
+- wang-mang：胡适说王莽是「社会主义者」出自 1922 年《王莽——一千九百年前的一个社会主义者》（《读书杂志》第 1 期），原稿作「1928 年演讲」系与 1928 年英文演说稿／《再论王莽》混淆；并补入《再论王莽》「新法大都有所本、六筦只有三筦是创制」。
+- si-ma-qian：王国维定生年前 145 年的依据是《索隐》引《博物志》「年二十八」当作「三十八」、与《正义》「年四十二」相差十岁，不是「年十岁则诵古文」；卒年「绝不可考」，「视为与武帝相终始」。
+- li-zhi：述论稿上篇、中篇都无「废王立武是关陇元老与山东寒族对抗」之论，改为上篇原意（武曌破坏关中本位政策、崇进士科，「武周之代李唐……实亦社会之革命」）。
+- wang-anshi：梁启超「青苗似银行、免役似所得税」等比附在维基文库未收的后续章节，核不到，删去；改用叙论「于三代下求完人，惟公庶足当之」、例言「以今世欧美政治比较」等可核原文。书名订为《王荆公》（后以《王安石传》名行世）。
+- jing-tian-zhi、bai-jia-zheng-ming、tao-yuan-ming、fengjian-zongfa-liyue：原意大体不误，按原文补足论据与出处版本。
+
+古籍 quote 订正：
+- bai-jia-zheng-ming《庄子·天下》：原 quote「天下之治方术者，多得一察焉以自好」系把两处拼成一句，改为原句「天下多得一察焉以自好」。
+- fengjian-zongfa-liyue 顾炎武「封建之失，其专在下；郡县之失，其专在上」出《郡县论》一（《顾亭林文集》卷一），非《日知录》卷八。
+- tao-yuan-ming《宋书》本传「每有会意，欣然忘食」无「便」字（陶集本有）。
+- li-zhi《旧唐书》卷四「母曰文德顺圣长孙皇后」（原作「文德顺圣皇后长孙氏」）。
+- si-ma-qian《汉书·李陵传》其实明记「下迁腐刑」，原 note「传中未直接写司马迁受刑事」错。
+- wang-anshi《宋史》本传「性强忮……执意不回」在传文中，不在传末论赞。
+- 其余引文逐字相符；异体或版本异文未改：《左传》定公四年「以蕃屏周」维基文库作「藩」，《汉书·王莽传》赞「紫色蛙声」原作「䵷」。
+
+**M0 样例问题处理**：
+- M0 样例中 5 篇的陈寅恪转述当年未打标记也未核，本次对照《唐代政治史述论稿》全部核正：an-lushan-rebellion（原稿「河北自北朝以来聚居胡人」与陈氏「北魏至隋汉化未衰、至武后玄宗之世始胡化」相反，改；出处删去下篇）、sweet-dew-incident（「外朝最后尝试」不合原文，改为「士大夫之党乃阉寺党之附属品」原意）、yuanhe-restoration（删「埋下宦官专权祸根」，改为元和用兵由吐突承璀主张于内、李吉甫赞成于外）、wu-zhou-usurpation、xuanwu-gate-incident（原意不误，按原文补足）。
+- kaiyuan-golden-age 的「待核」已核：天宝十三载户口见《资治通鉴》卷二百一十七（户 9,069,154，口 52,880,488），《旧唐书》卷九户作 9,619,254；原引杜佑「承平日久，人物殷阜」在《通典》卷七未见，改为原文「此国家之极盛也」。
+- kaiyuan-golden-age（吕思勉《隋唐五代史》）、liangshui-fa、zhenguan-reign（钱穆《国史大纲》）的学者转述无法网核，补打「（AI收集）」标记，**3 篇 reviewed→draft**，与 README「带待核标记的节点不应 reviewed」一致。
+- 未能核而保持 draft：wu-yue-hegemony（童书业《春秋史》维基文库仅序）、changping-battle（吕思勉《先秦史》仅前两章）。
+
+校验：`npm run validate` 0 错误。现状 37 reviewed / 292 draft（0 待核只卡 AI 转述者 145 篇，仍有待核者 137 篇，无标记而未核者 10 篇）。

@@ -11,9 +11,8 @@ importance: 5
 tags: [治世, 政治制度, 唐初]
 location: 长安
 related: [li-shimin, wei-zheng, xuanwu-gate-incident, kaiyuan-golden-age]
-status: reviewed
+status: draft
 generated_by: claude-fable-5-1
-reviewed_at: 2026-09-17
 ---
 
 ## 概述
@@ -62,7 +61,7 @@ reviewed_at: 2026-09-17
   category: modern
   license: paraphrase
   text: 钱穆强调贞观之治的根本在于制度而非个人：三省分权使宰相集体议政、门下省封驳制约君命，加上科举取士使政权向社会开放，这套体制是唐代盛世的骨架，太宗个人的纳谏是这套体制运转良好的表现。
-  note: 原稿误作"第四编第二十三章"，《国史大纲》第四编为魏晋南北朝之部；论唐内容在第五编，具体章次待核。
+  note: 原稿误作"第四编第二十三章"，《国史大纲》第四编为魏晋南北朝之部；论唐内容在第五编，具体章次待核；（AI收集）AI 转述观点，原书未经人工核校。
 - author: AI 综述
   source: 综合《贞观政要》《通典》及钱穆、吕思勉、黄永年等论著
   category: ai
